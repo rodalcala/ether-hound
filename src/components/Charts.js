@@ -1,13 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { LineChart } from '@aragon/ui';
 
 const Charts = ({ blocks }) => {
-  console.log('blocks.length', blocks.length)
-  let transactionsPerBlock;
+  const getTransactionsPerBlock = () => blocks.map((block) => block.transactions.length);
 
-  blocks.forEach(() => console.log('tuvieja'))
-
-  console.log('transactionsPerBlock', transactionsPerBlock)
+  console.log('getTransactionsPerBlock', getTransactionsPerBlock());
 
   return (
     <div className='Charts-container'>
@@ -22,4 +20,8 @@ const Charts = ({ blocks }) => {
   );
 }
 
-export default Charts;
+const mapStateToProps = state => ({
+  blocks: state.blocks,
+});
+
+export default connect(mapStateToProps)(Charts);
