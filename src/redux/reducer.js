@@ -11,7 +11,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_BLOCKS_SUCCESS:
-      console.log('blocks @ reducer', action.blocks)
       return { ...state, blocks: action.blocks }
     default:
       return state;

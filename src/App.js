@@ -12,7 +12,7 @@ const App = ({ getBlocks }) => {
   const [nBlocks, setNBlocks] = useState(10);
 
   useEffect(() => {
-    getBlocks(10)
+    getBlocks(10) /* NOTE: hardcoded until implementing throtle to setNBlocks */
   }, [getBlocks])
 
   return (
