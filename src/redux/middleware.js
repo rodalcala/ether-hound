@@ -16,7 +16,7 @@ const middleware = store => next => async action => {
     const allBlocks = [];
 
     for (let i = 0; i < n; i++) {
-      const block = await web3.eth.getBlock(latestBlock - i);
+      const block = await web3.eth.getBlock(latestBlock - i, true);
       allBlocks.push(block);
     };
 

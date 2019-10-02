@@ -3,19 +3,32 @@ import { connect } from 'react-redux';
 import { LineChart } from '@aragon/ui';
 
 const Charts = ({ blocks }) => {
-  const getTransactionsPerBlock = blocks.map((block) => block.transactions.length);
-  const emptyDataset = new Array(10).fill(0); /* NOTE: hardcoded until implementing throtle to setNBlocks */
+  const emptyDataset = new Array(10).fill(0); /* NOTE: hardcoded 10 until implementing throtle to setNBlocks */
+
+  const transactionsPerBlock = blocks.map((block) => block.transactions.length);
+  const biggestBlockByTrans = Math.max(...transactionsPerBlock);
+  const relativeTransactionsPerBlock = transactionsPerBlock.map((trans) => trans/biggestBlockByTrans);
+
+  const weiPerBlock = blocks
+    /* NOTE: Transform the array of blocks into an array of arrays of value per transaction */
+    .map((block) => block.transactions.map((trans) => trans.value))
+    /* NOTE: Add all the values per transaction to have an array of wei transfered per block */
+    .map((block) => block.reduce((total, num) => parseInt(total) + parseInt(num), 0));
+  const biggestBlockByWei = Math.max(...weiPerBlock);
+  const relativeWeiPerBlock = weiPerBlock.map((trans) => trans/biggestBlockByWei);
+
 
   return (
     <div className='Charts-container'>
       <LineChart
         lines={[
-          [0.1, 0.4, 0.5, 0.1, 0.4, 0.5, 0.1, 0.4, 0.5, 1],
-          getTransactionsPerBlock.length ? getTransactionsPerBlock : emptyDataset,
+          {id: 12, values: transactionsPerBlock.length ? relativeTransactionsPerBlock : emptyDataset, color: 'red'},
+          {id: 13, values: weiPerBlock.length ? relativeWeiPerBlock : emptyDataset, color: 'blue'}
         ]}
         springConfig={{ mass: 1, tension: 120, friction: 80 }}
         // label={index => index}
-        height={90}
+        width={1200}
+        height={700}
         color={() => `#21aae7`}
       />
     </div>
