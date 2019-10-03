@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart } from '@aragon/ui';
+import { LineChart, theme } from '@aragon/ui';
 
 const Charts = ({ blocks, nBlocks }) => {
   const emptyDataset = new Array(nBlocks).fill(0);
@@ -21,10 +21,9 @@ const Charts = ({ blocks, nBlocks }) => {
   return (
     <div className='Charts-container'>
       <LineChart
-        total={2}
         lines={[
-          {id: 12, values: transactionsPerBlock.length ? relativeTransactionsPerBlock : emptyDataset, color: 'red'},
-          {id: 13, values: weiPerBlock.length ? relativeWeiPerBlock : emptyDataset, color: 'blue'}
+          { id: 1, values: transactionsPerBlock.length ? relativeTransactionsPerBlock : emptyDataset, color: theme.gradientStartActive },
+          { id: 2, values: weiPerBlock.length ? relativeWeiPerBlock : emptyDataset, color: theme.gradientEndActive }
         ]}
         springConfig={{ mass: 1, tension: 120, friction: 80 }}
         label={index => index + 1}
