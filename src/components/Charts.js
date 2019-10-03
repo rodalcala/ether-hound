@@ -21,15 +21,15 @@ const Charts = ({ blocks }) => {
   return (
     <div className='Charts-container'>
       <LineChart
+        total={2}
         lines={[
           {id: 12, values: transactionsPerBlock.length ? relativeTransactionsPerBlock : emptyDataset, color: 'red'},
           {id: 13, values: weiPerBlock.length ? relativeWeiPerBlock : emptyDataset, color: 'blue'}
         ]}
         springConfig={{ mass: 1, tension: 120, friction: 80 }}
-        // label={index => index}
-        width={1200}
-        height={700}
-        color={() => `#21aae7`}
+        label={index => index + 1}
+        width={1100}
+        height={550}
       />
     </div>
   );

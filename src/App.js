@@ -16,7 +16,7 @@ const App = ({ getBlocks }) => {
   }, [getBlocks])
 
   return (
-    <Main>
+    <Main className={'main'}>
       <Header nBlocks={nBlocks} setNBlocks={setNBlocks} />
       <Charts />
     </Main>
