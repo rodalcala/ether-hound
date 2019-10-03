@@ -9,11 +9,24 @@ body {
 
 .Header-container {
   width: 100%;
-  padding: 30px 5px;
+  padding: 30px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Header-slider-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+}
+
+.Header-text {
+  padding: 0 15px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .Charts-container {

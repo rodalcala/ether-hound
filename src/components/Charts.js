@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart } from '@aragon/ui';
 
-const Charts = ({ blocks }) => {
-  const emptyDataset = new Array(10).fill(0); /* NOTE: hardcoded 10 until implementing throtle to setNBlocks */
+const Charts = ({ blocks, nBlocks }) => {
+  const emptyDataset = new Array(nBlocks).fill(0);
 
   const transactionsPerBlock = blocks.map((block) => block.transactions.length);
   const biggestBlockByTrans = Math.max(...transactionsPerBlock);

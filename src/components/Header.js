@@ -1,21 +1,32 @@
-import React from 'react';
-import { Slider } from '@aragon/ui'
+import React, { useState } from 'react';
+import { Modal, Button, DropDown } from '@aragon/ui';
 
 const Header = ({ nBlocks, setNBlocks }) => {
-  const handleSlider = (value) => {
-    console.log(value * 10);
-    setNBlocks(value);
-  }
+  const [ opened, setOpened ] = useState(false);
+  const items = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ];
+
+  const handleDropDown = (value, item) => {
+    setNBlocks(item[value])
+  };
 
   return (
-    <div className='Header-container'>
-      <p>How many blocks would you like to fetch?</p>
-      <Slider
-        value={nBlocks}
-        onUpdate={(value) => handleSlider(value)}
-      />
+    <div className="Header-container">
+      <Button mode="strong" size="small" onClick={() => setOpened(true)}>
+        <p className="Header-text">About</p>
+      </Button>
+
+      <Modal visible={opened} onClose={() => setOpened(false)}>
+        This webapp was created by Rodrigo Alcala, bootstrapped with Create React App and uses aragonUI
+        elements.
+        <Button onClick={() => setOpened(false)}>Close modal</Button>
+      </Modal>
+
+      <div className="Header-slider-container">
+        <p className="Header-text">How many blocks would you like to fetch?</p>
+        <DropDown items={items} active={nBlocks - 2} onChange={handleDropDown} />
+      </div>
     </div>
   );
-}
+};
 
 export default Header;

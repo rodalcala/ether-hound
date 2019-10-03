@@ -7,18 +7,17 @@ import actions from './redux/actions';
 import Header from './components/Header';
 import Charts from './components/Charts';
 
-
 const App = ({ getBlocks }) => {
   const [nBlocks, setNBlocks] = useState(10);
 
   useEffect(() => {
-    getBlocks(10) /* NOTE: hardcoded until implementing throtle to setNBlocks */
-  }, [getBlocks])
+    getBlocks(nBlocks)
+  }, [getBlocks, nBlocks])
 
   return (
     <Main className={'main'}>
       <Header nBlocks={nBlocks} setNBlocks={setNBlocks} />
-      <Charts />
+      <Charts nBlocks={nBlocks} />
     </Main>
   )
 }
