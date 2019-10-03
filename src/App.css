@@ -33,5 +33,19 @@ body {
   width: 100%;
   height: 800px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.Charts-info {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px 0;
+}
+
+.Charts-info p {
+  font-size: 16px;
+}
+
+.Charts-info-white {
+  color: white;
 }

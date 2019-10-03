@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, theme } from '@aragon/ui';
+import { LineChart, Info, theme } from '@aragon/ui';
 
 const Charts = ({ blocks, nBlocks }) => {
   const emptyDataset = new Array(nBlocks).fill(0);
@@ -30,6 +30,10 @@ const Charts = ({ blocks, nBlocks }) => {
         width={1100}
         height={550}
       />
+      <div className='Charts-info'>
+        <Info background={theme.gradientStartActive}><p className='Charts-info-white'>Relative amount of transactions per block in the dataset</p></Info>
+        <Info background={theme.gradientEndActive}><p>Relative amount of ETH moved per block in the dataset</p></Info>
+      </div>
     </div>
   );
 }

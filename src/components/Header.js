@@ -15,6 +15,7 @@ const Header = ({ nBlocks, setNBlocks }) => {
         <p className="Header-text">About</p>
       </Button>
 
+      {/* TO-DO: Make a component for the modal and import it here */}
       <Modal visible={opened} onClose={() => setOpened(false)}>
         This webapp was created by Rodrigo Alcala, bootstrapped with Create React App and uses aragonUI
         elements.
