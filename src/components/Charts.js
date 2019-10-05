@@ -66,6 +66,7 @@ const Charts = ({ blocks, nBlocks }) => {
 
 const mapStateToProps = state => ({
   blocks: state.blocks,
+  nBlocks: state.nBlocks,
 });
 
 export default connect(mapStateToProps)(Charts);

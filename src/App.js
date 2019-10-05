@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Main, theme } from '@aragon/ui';
 import { PropagateLoader } from 'react-spinners';
@@ -8,9 +8,7 @@ import actions from './redux/actions';
 import Header from './components/Header';
 import Charts from './components/Charts';
 
-const App = ({ getBlocks, isAppReady }) => {
-  const [nBlocks, setNBlocks] = useState(10);
-
+const App = ({ getBlocks, isAppReady, nBlocks }) => {
   useEffect(() => {
     getBlocks(nBlocks)
   }, [getBlocks, nBlocks])
@@ -18,8 +16,8 @@ const App = ({ getBlocks, isAppReady }) => {
   if (isAppReady) {
     return (
       <Main className='main'>
-        <Header nBlocks={ nBlocks } setNBlocks={ setNBlocks } />
-        <Charts nBlocks={ nBlocks } />
+        <Header />
+        <Charts />
       </Main>
     )
   } else {
@@ -32,7 +30,8 @@ const App = ({ getBlocks, isAppReady }) => {
 }
 
 const mapStateToProps = state => ({
-  isAppReady: state.isAppReady
+  isAppReady: state.isAppReady,
+  nBlocks: state.nBlocks,
 })
 
 const mapDispatchToProps = dispatch => ({

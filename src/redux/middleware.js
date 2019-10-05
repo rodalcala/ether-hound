@@ -2,7 +2,7 @@
 
 const middleware = store => next => async action => {
   
-  if (!action.nBlocks) return next(action);
+  if (!action.triggerAsync) return next(action);
   
   const { type } = action;
   const { web3 } = store.getState();

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Modal, Button, DropDown } from '@aragon/ui';
+
+import actions from '../redux/actions';
 
 const Header = ({ nBlocks, setNBlocks }) => {
   const [opened, setOpened] = useState(false);
@@ -30,4 +33,12 @@ const Header = ({ nBlocks, setNBlocks }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  nBlocks: state.nBlocks,
+})
+
+const mapDispatchToProps = dispatch => ({
+  setNBlocks: (nBlocks) => dispatch(actions.setNBlocks(nBlocks)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
