@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, Info, theme } from '@aragon/ui';
+import { LineChart, Info, PartitionBar, theme } from '@aragon/ui';
 
 const Charts = ({ blocks, nBlocks }) => {
   const emptyDataset = new Array(nBlocks).fill(0);
@@ -9,14 +9,36 @@ const Charts = ({ blocks, nBlocks }) => {
   const biggestBlockByTrans = Math.max(...transactionsPerBlock);
   const relativeTransactionsPerBlock = transactionsPerBlock.map((trans) => trans/biggestBlockByTrans);
 
-  const weiPerBlock = blocks
-    /* NOTE: Transform the array of blocks into an array of arrays of value per transaction */
-    .map((block) => block.transactions.map((trans) => trans.value))
-    /* NOTE: Add all the values per transaction to have an array of wei transfered per block */
-    .map((block) => block.reduce((total, num) => parseInt(total) + parseInt(num), 0));
+  /* NOTE: Transform the array of blocks into an array of arrays of value per transaction */
+  const weiPerTransaction = blocks.map((block) => block.transactions.map((trans) => trans.value));
+  /* NOTE: Add all the values per transaction to have an array of wei transfered per block */
+  const weiPerBlock = weiPerTransaction.map((block) => block.reduce((total, num) => parseInt(total) + parseInt(num), 0));
   const biggestBlockByWei = Math.max(...weiPerBlock);
   const relativeWeiPerBlock = weiPerBlock.map((trans) => trans/biggestBlockByWei);
 
+  let transactionsWithEth = 0;
+  let transactionsWithoutEth = 0;
+
+  weiPerTransaction.forEach((block) => block.forEach((transValue) => {
+    if (transValue === '0') transactionsWithoutEth++;
+    else transactionsWithEth++
+  }))
+
+  const getPartitionBarData = () => {
+    const totalTransactions = transactionsWithEth + transactionsWithoutEth;
+    const data = [
+      {
+        name: 'Transactions sending ETH',
+        percentage: transactionsWithEth / totalTransactions * 100,
+      },
+      {
+        name: 'Transactions not sending ETH',
+        percentage: transactionsWithoutEth / totalTransactions * 100,
+      },
+    ];
+
+    return data;
+  }
 
   return (
     <div className='Charts-container'>
@@ -31,9 +53,10 @@ const Charts = ({ blocks, nBlocks }) => {
         height={550}
       />
       <div className='Charts-info'>
-        <Info background={theme.gradientStartActive}><p className='Charts-info-white'>Relative amount of transactions per block in the dataset</p></Info>
-        <Info background={theme.gradientEndActive}><p>Relative amount of ETH moved per block in the dataset</p></Info>
+        <Info background={ theme.gradientStartActive }><p className='Charts-info-white'>Relative amount of transactions per block in the dataset</p></Info>
+        <Info background={ theme.gradientEndActive }><p>Relative amount of ETH moved per block in the dataset</p></Info>
       </div>
+      <PartitionBar data={ getPartitionBarData() } colors={[theme.accent, theme.disabled]} />
     </div>
   );
 }
