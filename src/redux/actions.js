@@ -1,11 +1,17 @@
 import {
   SET_NUMBER_OF_BLOCKS,
   GET_BLOCKS,
+  SET_ACTIVE_BLOCK,
 } from './constants';
 
 const setNBlocks = (nBlocks) => ({
   type: SET_NUMBER_OF_BLOCKS,
   nBlocks,
+});
+
+const setActiveBlock = (blockNumber) => ({
+  type: SET_ACTIVE_BLOCK,
+  blockNumber,
 });
 
 const getBlocks = (nBlocks) => ({
@@ -16,5 +22,6 @@ const getBlocks = (nBlocks) => ({
 
 export default {
   setNBlocks,
+  setActiveBlock,
   getBlocks,
 };

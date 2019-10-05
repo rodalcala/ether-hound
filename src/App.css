@@ -61,3 +61,10 @@ body {
   border-bottom: 1px solid grey;
   margin: 20px;
 }
+
+.BlockPicker-container {
+  display: flex;
+  /* justify-content: center; */
+  width: 1100px;
+  overflow-x: scroll;
+}

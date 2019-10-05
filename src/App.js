@@ -6,6 +6,7 @@ import { PropagateLoader } from 'react-spinners';
 import './App.css';
 import actions from './redux/actions';
 import Header from './components/Header';
+import BlockPicker from './components/BlockPicker';
 import Charts from './components/Charts';
 
 const App = ({ getBlocks, isAppReady, nBlocks }) => {
@@ -17,6 +18,7 @@ const App = ({ getBlocks, isAppReady, nBlocks }) => {
     return (
       <Main className='main'>
         <Header />
+        <BlockPicker />
         <Charts />
       </Main>
     )
