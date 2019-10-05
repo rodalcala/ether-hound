@@ -49,3 +49,8 @@ body {
 .Charts-info-white {
   color: white;
 }
+
+.SeparationLine {
+  border-bottom: 1px solid grey;
+  margin: 20px;
+}

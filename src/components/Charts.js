@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Info, PartitionBar, theme } from '@aragon/ui';
 
+import SeparationLine from './SeparationLine';
+
 const Charts = ({ blocks, nBlocks }) => {
   const emptyDataset = new Array(nBlocks).fill(0);
 
@@ -56,6 +58,7 @@ const Charts = ({ blocks, nBlocks }) => {
         <Info background={ theme.gradientStartActive }><p className='Charts-info-white'>Relative amount of transactions per block in the dataset</p></Info>
         <Info background={ theme.gradientEndActive }><p>Relative amount of ETH moved per block in the dataset</p></Info>
       </div>
+      <SeparationLine />
       <PartitionBar data={ getPartitionBarData() } colors={[theme.accent, theme.disabled]} />
     </div>
   );
