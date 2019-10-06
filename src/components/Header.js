@@ -15,7 +15,7 @@ const Header = ({ nBlocks, setNBlocks }) => {
   return (
     <div className="Header-container">
       <Button mode="strong" size="small" onClick={ () => setOpened(true) }>
-        <p className="Header-text">About</p>
+        <p>About</p>
       </Button>
 
       {/* TO-DO: Make a component for the modal and import it here */}
@@ -26,7 +26,7 @@ const Header = ({ nBlocks, setNBlocks }) => {
       </Modal>
 
       <div className="Header-slider-container">
-        <p className="Header-text">How many blocks would you like to fetch?</p>
+        <p>How many blocks would you like to fetch?</p>
         <DropDown items={ items } active={ nBlocks - 2 } onChange={ handleDropDown } />
       </div>
     </div>

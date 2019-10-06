@@ -23,17 +23,17 @@ body {
   align-items: center;
 }
 
+.Header-container p {
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .Header-slider-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-}
-
-.Header-text {
-  padding: 0 15px;
-  font-size: 18px;
-  font-weight: 600;
 }
 
 .Charts-container {
@@ -67,4 +67,16 @@ body {
   /* justify-content: center; */
   width: 1100px;
   overflow-x: scroll;
+  margin-bottom: 15px;
+}
+
+.BlockDetails-container {
+  padding: 10px;
+}
+
+.BlockDetails-transaction-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
