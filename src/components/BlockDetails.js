@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { DropDown, Table, TableRow, TableHeader, TableCell, Text, IdentityBadge, TransactionBadge } from '@aragon/ui';
+import { DropDown, Table, TableRow, TableHeader, TableCell, Text, IdentityBadge, TransactionBadge, Button } from '@aragon/ui';
 
-const BlockDetails = ({ blocks, activeBlock, web3 }) => {
+import actions from '../redux/actions';
+
+const BlockDetails = ({ blocks, activeBlock, web3, getTransactionReceipt, activeTransactionReceipt }) => {
   const [ activeTransactionIndex, setActiveTransactionIndex ] = useState(0);
 
   const ethTransactionsFromActiveBlock = blocks
@@ -15,6 +17,12 @@ const BlockDetails = ({ blocks, activeBlock, web3 }) => {
     return `${prefix}...${sufix}`;
   });
   const activeTransaction = ethTransactionsFromActiveBlock[activeTransactionIndex];
+
+  useEffect(() => {
+    if (activeTransaction) {
+      getTransactionReceipt(activeTransaction.hash)
+    }
+  },[getTransactionReceipt, activeTransaction]);
 
   const handleDropDown = (index) => setActiveTransactionIndex(index);
 
@@ -73,7 +81,13 @@ const BlockDetails = ({ blocks, activeBlock, web3 }) => {
               <Text>Transaction status:</Text>
             </TableCell>
             <TableCell>
-              <Text>To be checked</Text>
+              {
+                  activeTransactionReceipt.gasUsed ?
+                    activeTransactionReceipt.status ?
+                      <Button emphasis="positive" size="small" disabled={true}>Success</Button> :
+                      <Button emphasis="negative" size="small" disabled={true}>Reverted</Button> :
+                    'To be checked'
+                }
             </TableCell>
             <TableCell>
               <Text>Ether transfered:</Text>
@@ -93,7 +107,13 @@ const BlockDetails = ({ blocks, activeBlock, web3 }) => {
               <Text>Gas used:</Text>
             </TableCell>
             <TableCell>
-              <Text>To be checked</Text>
+              <Text>
+                {
+                  activeTransactionReceipt.gasUsed ?
+                    `${activeTransactionReceipt.gasUsed} (${activeTransactionReceipt.gasUsed/activeTransaction.gas*100}%)` :
+                    'To be checked'
+                }
+              </Text>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -107,7 +127,13 @@ const BlockDetails = ({ blocks, activeBlock, web3 }) => {
               <Text>Transaction fee:</Text>
             </TableCell>
             <TableCell>
-              <Text>To be determine</Text>
+            <Text>
+                {
+                  activeTransactionReceipt.gasUsed ?
+                    `${web3.utils.fromWei(activeTransaction.gasPrice) * activeTransactionReceipt.gasUsed} Ether` :
+                    'To be checked'
+                }
+              </Text>
             </TableCell>
           </TableRow>
         </Table>
@@ -120,6 +146,11 @@ const mapStateToProps = (state) => ({
   blocks: state.blocks,
   activeBlock: state.activeBlock,
   web3: state.web3,
+  activeTransactionReceipt: state.activeTransactionReceipt,
 });
 
-export default connect(mapStateToProps)(BlockDetails);
+const mapDispatchToProps = dispatch => ({
+  getTransactionReceipt: (transactionHash) => dispatch(actions.getTransactionReceipt(transactionHash)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlockDetails);

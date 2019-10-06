@@ -24,16 +24,22 @@ const middleware = store => next => async action => {
   }
 
   try {
-    const blocks = await getBlocks(action.nBlocks);
+    let response;
+
+    if (action.nBlocks) {
+      response = await getBlocks(action.nBlocks);
+    } else if (action.transactionHash) {
+      response = await web3.eth.getTransactionReceipt(action.transactionHash)
+    }
   
     store.dispatch({
       type: `${type}_SUCCESS`,
-      blocks
+      response,
     })
   } catch(err) {
     store.dispatch({
       type: `${type}_FAILURE`,
-      err
+      err,
     })
   }
 

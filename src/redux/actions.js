@@ -2,6 +2,7 @@ import {
   SET_NUMBER_OF_BLOCKS,
   GET_BLOCKS,
   SET_ACTIVE_BLOCK,
+  GET_TRANSACTION_RECEIPT
 } from './constants';
 
 const setNBlocks = (nBlocks) => ({
@@ -20,8 +21,15 @@ const getBlocks = (nBlocks) => ({
   nBlocks,
 });
 
+const getTransactionReceipt = (transactionHash) => ({
+  type: GET_TRANSACTION_RECEIPT,
+  triggerAsync: true,
+  transactionHash,
+});
+
 export default {
   setNBlocks,
   setActiveBlock,
   getBlocks,
+  getTransactionReceipt,
 };
