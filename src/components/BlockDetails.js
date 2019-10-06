@@ -17,97 +17,103 @@ const BlockDetails = ({ blocks, activeBlock, web3 }) => {
   const activeTransaction = ethTransactionsFromActiveBlock[activeTransactionIndex];
 
   const handleDropDown = (index) => setActiveTransactionIndex(index);
-  console.log(ethTransactionsFromActiveBlock.length);
-  console.log('Active transaction', ethTransactionsByHash[activeTransactionIndex]);
 
-  return (
-    <div className="BlockDetails-container">
-      <div className="BlockDetails-transaction-selector">
-        <Text size="xlarge" weight="bold">
-          The selected block (#{activeBlock}) has {ethTransactionsFromActiveBlock.length} transactions moving Ether. Let's inspect one:
-        </Text>
-        <DropDown items={ethTransactionsBySlicedHash} active={activeTransactionIndex} onChange={handleDropDown} />
+  if (!ethTransactionsFromActiveBlock.length) {
+    return (
+      <div className="BlockDetails-container">
+        <Text size="xlarge" weight="bold">This block has no transactions moving Ether, try with another one!</Text>
       </div>
-      <Table
-        header={
+    );
+  } else {
+    return (
+      <div className="BlockDetails-container">
+        <div className="BlockDetails-transaction-selector">
+          <Text size="xlarge" weight="bold">
+            The selected block (#{activeBlock}) has {ethTransactionsFromActiveBlock.length} transactions moving Ether. Let's inspect one:
+          </Text>
+          <DropDown items={ethTransactionsBySlicedHash} active={activeTransactionIndex} onChange={handleDropDown} />
+        </div>
+        <Table
+          header={
+            <TableRow>
+              <TableHeader title="Transaction details" />
+            </TableRow>
+          }
+        >
           <TableRow>
-            <TableHeader title="Transaction details" />
+            <TableCell>
+              <Text>Transaction hash:</Text>
+            </TableCell>
+            <TableCell>
+              <TransactionBadge transaction={activeTransaction.hash} />
+            </TableCell>
+            <TableCell>
+              <Text>Nonce:</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{activeTransaction.nonce}</Text>
+            </TableCell>
           </TableRow>
-        }
-      >
-        <TableRow>
-          <TableCell>
-            <Text>Transaction hash:</Text>
-          </TableCell>
-          <TableCell>
-            <TransactionBadge transaction={activeTransaction.hash} />
-          </TableCell>
-          <TableCell>
-            <Text>Nonce:</Text>
-          </TableCell>
-          <TableCell>
-            <Text>{activeTransaction.nonce}</Text>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Text>Sender:</Text>
-          </TableCell>
-          <TableCell>
-            <IdentityBadge entity={activeTransaction.from} />
-          </TableCell>
-          <TableCell>
-            <Text>Reciever:</Text>
-          </TableCell>
-          <TableCell>
-            <IdentityBadge entity={activeTransaction.to} />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Text>Transaction status:</Text>
-          </TableCell>
-          <TableCell>
-            <Text>To be checked</Text>
-          </TableCell>
-          <TableCell>
-            <Text>Ether transfered:</Text>
-          </TableCell>
-          <TableCell>
-            <Text>{web3.utils.fromWei(activeTransaction.value)}</Text>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Text>Gas limit:</Text>
-          </TableCell>
-          <TableCell>
-            <Text>{activeTransaction.gas}</Text>
-          </TableCell>
-          <TableCell>
-            <Text>Gas used:</Text>
-          </TableCell>
-          <TableCell>
-            <Text>To be checked</Text>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Text>Gas price:</Text>
-          </TableCell>
-          <TableCell>
-            <Text>{web3.utils.fromWei(activeTransaction.gasPrice, 'Gwei')} Gwei</Text>
-          </TableCell>
-          <TableCell>
-            <Text>Transaction fee:</Text>
-          </TableCell>
-          <TableCell>
-            <Text>To be determine</Text>
-          </TableCell>
-        </TableRow>
-      </Table>
-    </div>
-  );
+          <TableRow>
+            <TableCell>
+              <Text>Sender:</Text>
+            </TableCell>
+            <TableCell>
+              <IdentityBadge entity={activeTransaction.from} />
+            </TableCell>
+            <TableCell>
+              <Text>Reciever:</Text>
+            </TableCell>
+            <TableCell>
+              <IdentityBadge entity={activeTransaction.to} />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Text>Transaction status:</Text>
+            </TableCell>
+            <TableCell>
+              <Text>To be checked</Text>
+            </TableCell>
+            <TableCell>
+              <Text>Ether transfered:</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{web3.utils.fromWei(activeTransaction.value)}</Text>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Text>Gas limit:</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{activeTransaction.gas}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>Gas used:</Text>
+            </TableCell>
+            <TableCell>
+              <Text>To be checked</Text>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Text>Gas price:</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{web3.utils.fromWei(activeTransaction.gasPrice, 'Gwei')} Gwei</Text>
+            </TableCell>
+            <TableCell>
+              <Text>Transaction fee:</Text>
+            </TableCell>
+            <TableCell>
+              <Text>To be determine</Text>
+            </TableCell>
+          </TableRow>
+        </Table>
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = (state) => ({
