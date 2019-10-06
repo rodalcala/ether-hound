@@ -62,7 +62,7 @@ const Charts = ({ blocks, nBlocks }) => {
           <Info background={ theme.gradientStartActive }><p className='Charts-info-white'>Relative amount of transactions per block in the dataset</p></Info>
           <Info background={ theme.gradientEndActive }><p>Relative amount of ETH moved per block in the dataset</p></Info>
         </div>
-        <SeparationLine />
+        <SeparationLine internal={true} />
         <PartitionBar data={ getPartitionBarData() } colors={[theme.accent, theme.disabled]} />
       </div>
     </div>

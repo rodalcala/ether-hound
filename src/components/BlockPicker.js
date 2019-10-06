@@ -5,18 +5,18 @@ import { TabBar } from '@aragon/ui'
 import actions from '../redux/actions';
 
 const BlockPicker = ({ blocks, setActiveBlock }) => {
-  const [selected, setSelected] = useState(0)
-  const items = blocks.map((block) => block.number)
+  const [selected, setSelected] = useState(0);
+  const blockNumbers = blocks.map((block) => `#${block.number}`);
 
   const handleActiveBlockChange = (index) => {
     setSelected(index);
-    setActiveBlock(items[index]);
+    setActiveBlock(blocks[index].number);
   }
 
   return (
     <div className='BlockPicker-container'>
       <TabBar
-        items={items}
+        items={blockNumbers}
         selected={selected}
         onChange={handleActiveBlockChange}
       />

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const SeparationLine = () => (
-  <div className="SeparationLine" />
+const SeparationLine = ({ internal }) => (
+  <div className={ internal ? "SeparationLine-internal" : "SeparationLine" } />
 );
 
 export default SeparationLine;

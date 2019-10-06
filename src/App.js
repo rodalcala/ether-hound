@@ -24,6 +24,7 @@ const App = ({ getBlocks, isAppReady, nBlocks }) => {
         <BlockDetails />
         <SeparationLine />
         <Charts />
+        <SeparationLine />
       </Main>
     )
   } else {
