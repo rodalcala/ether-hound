@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, Info, PartitionBar, theme } from '@aragon/ui';
+import { LineChart, Info, PartitionBar, Text, theme } from '@aragon/ui';
 
 import SeparationLine from './SeparationLine';
 
@@ -43,23 +43,28 @@ const Charts = ({ blocks, nBlocks }) => {
   }
 
   return (
-    <div className='Charts-container'>
-      <LineChart
-        lines={[
-          { id: 1, values: transactionsPerBlock.length ? relativeTransactionsPerBlock : emptyDataset, color: theme.gradientStartActive },
-          { id: 2, values: weiPerBlock.length ? relativeWeiPerBlock : emptyDataset, color: theme.gradientEndActive }
-        ]}
-        springConfig={{ mass: 1, tension: 120, friction: 80 }}
-        label={index => index + 1}
-        width={1100}
-        height={550}
-      />
-      <div className='Charts-info'>
-        <Info background={ theme.gradientStartActive }><p className='Charts-info-white'>Relative amount of transactions per block in the dataset</p></Info>
-        <Info background={ theme.gradientEndActive }><p>Relative amount of ETH moved per block in the dataset</p></Info>
+    <div>
+      <Text size="xlarge" weight="bold" className="Charts-header">
+        Here's a little overview information about the selected dataset:
+      </Text>
+      <div className='Charts-container'>
+        <LineChart
+          lines={[
+            { id: 1, values: transactionsPerBlock.length ? relativeTransactionsPerBlock : emptyDataset, color: theme.gradientStartActive },
+            { id: 2, values: weiPerBlock.length ? relativeWeiPerBlock : emptyDataset, color: theme.gradientEndActive }
+          ]}
+          springConfig={{ mass: 1, tension: 120, friction: 80 }}
+          label={index => index + 1}
+          width={1100}
+          height={550}
+        />
+        <div className='Charts-info'>
+          <Info background={ theme.gradientStartActive }><p className='Charts-info-white'>Relative amount of transactions per block in the dataset</p></Info>
+          <Info background={ theme.gradientEndActive }><p>Relative amount of ETH moved per block in the dataset</p></Info>
+        </div>
+        <SeparationLine />
+        <PartitionBar data={ getPartitionBarData() } colors={[theme.accent, theme.disabled]} />
       </div>
-      <SeparationLine />
-      <PartitionBar data={ getPartitionBarData() } colors={[theme.accent, theme.disabled]} />
     </div>
   );
 }

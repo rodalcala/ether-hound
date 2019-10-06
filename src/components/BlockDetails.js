@@ -86,7 +86,7 @@ const BlockDetails = ({ blocks, activeBlock, web3, getTransactionReceipt, active
                     activeTransactionReceipt.status ?
                       <Button emphasis="positive" size="small" disabled={true}>Success</Button> :
                       <Button emphasis="negative" size="small" disabled={true}>Reverted</Button> :
-                    'To be checked'
+                    'Checking...'
                 }
             </TableCell>
             <TableCell>
@@ -111,7 +111,7 @@ const BlockDetails = ({ blocks, activeBlock, web3, getTransactionReceipt, active
                 {
                   activeTransactionReceipt.gasUsed ?
                     `${activeTransactionReceipt.gasUsed} (${activeTransactionReceipt.gasUsed/activeTransaction.gas*100}%)` :
-                    'To be checked'
+                    'Checking...'
                 }
               </Text>
             </TableCell>
@@ -131,7 +131,7 @@ const BlockDetails = ({ blocks, activeBlock, web3, getTransactionReceipt, active
                 {
                   activeTransactionReceipt.gasUsed ?
                     `${web3.utils.fromWei(activeTransaction.gasPrice) * activeTransactionReceipt.gasUsed} Ether` :
-                    'To be checked'
+                    'Checking...'
                 }
               </Text>
             </TableCell>

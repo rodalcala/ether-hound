@@ -41,6 +41,11 @@ body {
   height: 800px;
   display: flex;
   flex-direction: column;
+  margin: 20px 0;
+}
+
+.Charts-header {
+  padding: 10px;
 }
 
 .Charts-info {
