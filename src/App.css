@@ -67,6 +67,7 @@ body {
   border-bottom: 5px solid grey;
   width: 50%;
   margin: 50px auto;
+  border-radius: 2px;
 }
 
 .SeparationLine-internal {
@@ -91,4 +92,20 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.AboutModal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.AboutModal-info {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0 20px 0;
+}
+
+.AboutModal-info-head {
+  padding: 5px 0 20px 0;
 }

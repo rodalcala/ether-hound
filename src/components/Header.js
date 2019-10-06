@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Button, DropDown } from '@aragon/ui';
+import { Button, DropDown } from '@aragon/ui';
 
 import actions from '../redux/actions';
+import AboutModal from './AboutModal';
 
 const Header = ({ nBlocks, setNBlocks }) => {
   const [opened, setOpened] = useState(false);
@@ -18,12 +19,7 @@ const Header = ({ nBlocks, setNBlocks }) => {
         <p>About</p>
       </Button>
 
-      {/* TO-DO: Make a component for the modal and import it here */}
-      <Modal visible={ opened } onClose={ () => setOpened(false) }>
-        This webapp was created by Rodrigo Alcala, bootstrapped with Create React App and uses aragonUI
-        elements.
-        <Button onClick={ () => setOpened(false) }>Close modal</Button>
-      </Modal>
+      <AboutModal opened={ opened } setOpened={ setOpened } />
 
       <div className="Header-slider-container">
         <p>How many blocks would you like to fetch?</p>

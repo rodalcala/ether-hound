@@ -8,7 +8,7 @@ import {
   GET_TRANSACTION_RECEIPT_SUCCESS,
 } from './constants';
 
-const web3 = new Web3(Web3.givenProvider || null /* TO-DO: add a fallback here */ );
+const web3 = new Web3(Web3.givenProvider);
 
 const initialState = {
   web3,
