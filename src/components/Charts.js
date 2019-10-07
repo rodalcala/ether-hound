@@ -69,7 +69,7 @@ const Charts = ({ blocks, nBlocks }) => {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   blocks: state.blocks,
   nBlocks: state.nBlocks,
 });
