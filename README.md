@@ -1,4 +1,4 @@
-# Front-end coding challenge for Aragon One
+# Front-end tech challenge for Aragon One
 
 
 
