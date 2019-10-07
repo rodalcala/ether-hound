@@ -1,3 +1,5 @@
+/* ABOUT: First component in the body. Displays all blocks and picks the active one. */
+
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { TabBar } from '@aragon/ui'

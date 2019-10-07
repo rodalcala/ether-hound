@@ -1,3 +1,5 @@
+/* ABOUT: Main component of this SPA. Handles blocks retrieval and loading status. */
+
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Main, theme } from '@aragon/ui';

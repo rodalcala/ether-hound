@@ -1,3 +1,5 @@
+/* ABOUT: Header component. Determines the amount of blocks to fetch. */
+
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, DropDown } from '@aragon/ui';

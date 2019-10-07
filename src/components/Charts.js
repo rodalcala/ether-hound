@@ -1,3 +1,5 @@
+/* ABOUT: Component displaying facts about the selected dataset. */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Info, PartitionBar, Text, theme } from '@aragon/ui';

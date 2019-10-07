@@ -83,11 +83,11 @@ body {
   margin-bottom: 15px;
 }
 
-.BlockDetails-container {
+.TransactionPicker-container {
   padding: 10px;
 }
 
-.BlockDetails-transaction-selector {
+.TransactionPicker-transaction-selector {
   display: flex;
   justify-content: space-between;
   align-items: center;
