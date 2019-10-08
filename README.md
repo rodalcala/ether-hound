@@ -9,6 +9,8 @@ It displays some detailed information about a specific transaction, which is by 
 
 It also displays some facts about the dataset under analysis.
 
+The app was built entirely using [aragonUI](https://ui.aragon.org/) components to give it a consistent look.
+
 
 
 ## Getting started
